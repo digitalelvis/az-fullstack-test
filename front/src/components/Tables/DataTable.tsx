@@ -80,8 +80,8 @@ const DataTable = ({ orders, page, setPage, limit, setLimit, total_pages }: Data
           </button>
           <button
           className="text-primary hover:bg-primary hover:text-white rounded-full p-2"
-          disabled={page === 1}
-          onClick={() => setPage(1)}> 
+          disabled={page === total_pages}
+          onClick={() => setPage(total_pages)}> 
             <FiChevronsRight size={20} /> 
           </button>
         </div>
