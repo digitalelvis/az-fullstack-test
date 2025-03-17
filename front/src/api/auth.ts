@@ -1,9 +1,5 @@
+import { ProofSession } from "../interfaces/authInterface";
 import api from "./api";
-
-export interface ProofSession {
-  email: string;
-  password: string;
-}
 
 export const callLogin = async (data: ProofSession) => {
   try {
@@ -12,7 +8,6 @@ export const callLogin = async (data: ProofSession) => {
   } catch (error: any) {
     // Verifica se existe uma resposta da API com mensagem de erro
     const errorMessage = error.response?.data?.message || "Erro desconhecido.";
-  
     return { error: true, message: errorMessage };
   }
 };

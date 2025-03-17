@@ -3,18 +3,10 @@
  */
 export const logout = (setUser: Function) => {
     // Limpar o localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("id");
+    localStorage.removeItem("user");
   
-    // Atualizar o estado para remover os dados do usuário
-    setUser({
-      token: null,
-      name: null,
-      email: null,
-      id: null,
-    });
+    // Atualizar o estado
+    setUser(null);
   
     // Redirecionar o usuário para a página de login
     window.location.href = "/login";  // Ou usar React Router para redirecionamento

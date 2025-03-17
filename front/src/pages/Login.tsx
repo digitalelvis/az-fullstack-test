@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useAuthStore } from "../store/authStore";
+import { useAuthStore } from "../store/auth";
 import { callLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "../components/Logo";
 import BG from "../assets/images/background/bg-login.jpg";
 import PrimaryButton from "../components/Buttons/PrimaryButton";
+import { User } from "../interfaces/authInterface";
 
 // Esquema de validação
 const schema = yup.object({
@@ -26,6 +27,7 @@ const Login = () => {
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
+  // No método onSubmit irá atualizar a criação do objeto userData e salvar no estado global:
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
       const response = await callLogin(data);
@@ -35,12 +37,20 @@ const Login = () => {
         return;
       }
 
-      setUser({
+      // Criando o objeto do usuário autenticado
+      const userData: User = {
         token: response.token,
-        name: response.profile.name,
         email: response.email,
         id: response.id,
-      });
+        profile: {
+          name: response.profile.name,
+        },
+        currency: response.currency,
+        locale: response.locale
+      };
+      
+      // Salvando o usuário no estado global
+      setUser(userData);
 
       toast.success("Login realizado com sucesso!");
       navigate("/dashboard");
@@ -48,6 +58,7 @@ const Login = () => {
       toast.error(error instanceof Error ? error.message : "Ocorreu um erro inesperado.");
     }
   };
+
 
   return (
     <div className="columns-2">
@@ -81,11 +92,6 @@ const Login = () => {
                 <label htmlFor="password" className="block text-sm font-medium text-gray-900">
                   Senha
                 </label>
-                <div className="text-sm">
-                  <p className="font-semibold text-primary hover:text-primary-500">
-                    Esqueceu a senha?
-                  </p>
-                </div>
               </div>
 
               <div className="mt-2 relative">
@@ -102,11 +108,17 @@ const Login = () => {
                   className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
                   onClick={togglePasswordVisibility}
                 >
-                    {showPassword ? "Mostrar" : "Escondder"}
+                    {showPassword ? "Esconder" : "Mostrar"}
                 </button>
                 {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
               </div>
             </div>
+
+            <div className="text-sm">
+                  <p className="font-semibold text-primary hover:text-primary-500">
+                    Esqueceu a senha?
+                  </p>
+                </div>
 
             <div>
               <PrimaryButton label="Sign in" size="md" />
