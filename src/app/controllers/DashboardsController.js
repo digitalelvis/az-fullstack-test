@@ -82,13 +82,11 @@ class DashboardsController {
           average_ticket: 0,
         },
         orders,
-        pagination: {
-          has_more: page * limit < totalOrdersCount,
+        has_more: page * limit < totalOrdersCount,
           limit,
           total_pages: Math.ceil(totalOrdersCount / limit),
           page,
           total: totalOrdersCount
-        }
       });
 
     } catch (error) {
