@@ -6,7 +6,7 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ initials, onClick }) => {
   return (
     <div 
-      className="avatar bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+      className="avatar bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
       onClick={onClick}  // Adiciona a funcionalidade de click
     >
       {initials}

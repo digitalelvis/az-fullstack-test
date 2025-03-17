@@ -28,7 +28,7 @@ const Topbar = () => {
     .join("");
 
   return (
-    <div className="topbar bg-white shadow-md p-4 flex justify-between items-center">
+    <div className="topbar bg-white shadow-sm p-4 flex justify-between items-center">
       <div className="logo mb-8 md:hidden">
         <Logo size="md" />
       </div>
@@ -38,24 +38,29 @@ const Topbar = () => {
           </button>
         </div>
 
-        <div className="user-info flex items-center space-x-4">
-          <span>Olá, {userName}</span>
-          <div className="relative">
-            <Avatar initials={avatarInitials} onClick={toggleDropdown} />
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10">
-                <ul>
-                  <li
-                    className="px-4 py-2 text-red-600 cursor-pointer hover:bg-gray-100"
-                    onClick={handleLogout} // Use handleLogout function
-                  >
-                    Sair
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
+      <div className="flex items-end gap-3 cursor-pointer" onClick={toggleDropdown}>
+        <div className="user-info flex-row items-start">
+          <div>Olá,</div>
+          <div className="font-bold">{userName}</div>
         </div>
+
+        <div className="relative">
+              <Avatar initials={avatarInitials} />
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10">
+                  <ul>
+                    <li
+                      className="px-4 py-2 text-red-600 cursor-pointer hover:bg-gray-100"
+                      onClick={handleLogout}
+                    >
+                      Sair
+                    </li>
+                  </ul>
+                </div>
+              )}
+          </div>
+      </div>
+        
     </div>
   );
 };
