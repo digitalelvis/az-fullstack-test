@@ -6,8 +6,8 @@ export interface User {
     email: string | null;
     id: string | null;
     profile: Profile | null;
-    currency: string;
-    locale: string;
+    currency: string | null;
+    locale: string | null;
 }
 export interface AuthState {
   user: User | null;

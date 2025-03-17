@@ -33,15 +33,18 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      <div className="grid grid-cols-3 gap-4">
+    <h2 className="text-xl mb-4">Resumo dos pedidos</h2>
+
+      <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard
           image={IconOrder}
-          title="Total de Pedidos"
-          value={loading ? "..." : dashboardData?.orders_count ?? 0}
+          
+          title={loading ? "..." : `${dashboardData?.orders_count} Pedidos`}
+          value={loading ? "..." : `R$ ${dashboardData?.orders_total?.toFixed(2) ?? "0.00"}`}
         />
         <StatCard
           image={IconSales}
-          title="Total de Vendas"
+          title={loading ? "..." : `${dashboardData?.sales_count} Vendas`}
           value={loading ? "..." : `R$ ${dashboardData?.sales_total?.toFixed(2) ?? "0.00"}`}
         />
         <StatCard
@@ -51,11 +54,9 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* DataTable - Últimos Pedidos */}
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Últimos Pedidos</h2>
-        <DataTable orders={dashboardData?.orders ?? []} />
-      </div>
+      {/* Últimos Pedidos */}
+      <DataTable orders={dashboardData?.orders ?? []} />
+
     </DashboardLayout>
   );
 };

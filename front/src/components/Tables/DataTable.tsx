@@ -1,12 +1,6 @@
 import { useState } from "react";
+import { Order } from "../../interfaces/orders";
 
-interface Order {
-  _id: string;
-  customer: { name: string };
-  createdAt: string;
-  status: string;
-  payment: { amount: number; method: string };
-}
 
 interface DataTableProps {
   orders: Order[];
@@ -38,24 +32,30 @@ const DataTable = ({ orders }: DataTableProps) => {
 
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 text-left">#</th>
-            <th className="p-2 text-left">Cliente</th>
-            <th className="p-2 text-left">Data</th>
-            <th className="p-2 text-left">Status</th>
-            <th className="p-2 text-left">Valor</th>
-            <th className="p-2 text-left">Pagamento</th>
+          <tr className="  text-white rounded-t-lg">
+            <th className="p-2 text-left bg-opacity-90 bg-primary rounded-tl-xl">ID do Pedido</th>
+            <th className="p-2 text-left bg-primary">ID na Loja</th>
+            <th className="p-2 text-left bg-opacity-90 bg-primary">Criação</th>
+            <th className="p-2 text-left bg-primary">Nome do Cliente</th>
+            <th className="p-2 text-lef bg-opacity-90 bg-primary">CPF/CNPJ do Cliente</th>
+            <th className="p-2 text-left bg-primary">Status do pedido</th>
+            <th className="p-2 text-left  bg-opacity-90 bg-primary">Status do pagamento</th>
+            <th className="p-2 text-left bg-primary">Método de Pagamento</th>
+            <th className="p-2 text-left bg-opacity-90 bg-primary rounded-tr-xl">Total</th>
           </tr>
         </thead>
         <tbody>
-          {paginatedOrders.map((order, index) => (
+          {paginatedOrders.map((order) => (
             <tr key={order._id} className="border-t">
-              <td className="p-2">{startIndex + index + 1}</td>
-              <td className="p-2">{order.customer.name}</td>
+              <td className="p-2">{order._id}</td>
+              <td className="p-2">{order.order_seller_id}</td> {/* Corrected field */}
               <td className="p-2">{new Date(order.createdAt).toLocaleDateString()}</td>
+              <td className="p-2">{order.customer.name}</td>
+              <td className="p-2">{order.customer.doc}</td> {/* Added customer doc */}
               <td className="p-2">{order.status}</td>
-              <td className="p-2">R$ {order.payment.amount.toFixed(2)}</td>
+              <td className="p-2">{order.payment.status}</td> {/* Corrected field */}
               <td className="p-2">{order.payment.method}</td>
+              <td className="p-2">R$ {order.payment.amount.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -84,3 +84,5 @@ const DataTable = ({ orders }: DataTableProps) => {
 };
 
 export default DataTable;
+
+    

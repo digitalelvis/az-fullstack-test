@@ -1,15 +1,16 @@
-export interface DashboardOrder {
-    _id: string;
-    customer: { name: string };
-    createdAt: string;
-    status: string;
-    payment: { amount: number; method: string };
-  }
-  
+import { Order } from "./orders";
+
   export interface DashboardData {
     orders_count: number;
+    orders_total: number;
     sales_total: number;
+    sales_count: number;
     average_ticket: number;
-    orders: DashboardOrder[];
+    orders: Order[];
+    has_more: boolean;
+    limit: number;
+    page: number;
+    total: number;
+    total_pages: number;
   }
   

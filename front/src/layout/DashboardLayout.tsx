@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <Topbar />
 
         {/* Container de conteúdo */}
-        <div className="content-container flex-1 overflow-auto p-4">
+        <div className="content-container flex-1 overflow-auto p-8">
           {children}
         </div>
       </div>

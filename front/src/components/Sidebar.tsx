@@ -6,7 +6,7 @@ const Sidebar = () => {
   const location = useLocation(); // Obtém a rota atual
 
   return (
-    <div className="bg-white shadow-md w-80 h-full p-4">
+    <div className="bg-white shadow-xl w-80 h-full p-4 hidden md:block">
       <div className="logo mb-8">
         <Logo size="md" />
       </div>

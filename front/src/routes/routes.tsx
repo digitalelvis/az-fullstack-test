@@ -8,7 +8,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       
-      {/* Rotas protegidas utilizando HOC */}
+      {/* Rotas protegidas podem ser adicionadas aqui*/}
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
